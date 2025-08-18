@@ -4,7 +4,8 @@ This repository contains educational materials and tutorials developed during th
 
 
 ## 1. Open the Notebook in Google Colab
-   - Click the Colab link for ['train_model.ipynb'](https://colab.research.google.com/drive/15nQznMSMnyAkQyuxM7ZbdzXM_5f_9FMy?usp=sharing).  
+   - Click the Colab link for ['train_model.ipynb'](https://colab.research.google.com/drive/15nQznMSMnyAkQyuxM7ZbdzXM_5f_9FMy?usp=sharing).
+   - In Colab, go to **File → Save a copy in Drive** to save your own copy.
 
 ## 2. Prepare Your Dataset  
    Organize your insect images so each species has its own folder:
