@@ -91,7 +91,7 @@ The notebook shows:
 This repository provides a **testing notebook** (`test_model_with_gradio.ipynb`) that lets you upload a trained model and interactively run predictions via a **Gradio web interface**.  
 
 ## 1. Open the Notebook in Google Colab  
-- Click the Colab link for ['test_model_with_gradio.ipynb'](https://colab.research.google.com/drive/YOUR_NOTEBOOK_ID_HERE).  
+- Click the Colab link for ['test_model_with_gradio.ipynb'](https://colab.research.google.com/drive/1waaanvDYt3pdtK7MAqvpAW9AE_TdR2uC?usp=sharing).  
 - In Colab, go to **File → Save a copy in Drive** to save your own copy.  
 
 ## 2. Run the Notebook  
