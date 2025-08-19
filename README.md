@@ -119,5 +119,7 @@ Once the interface launches, you can:
 ## Notes  
 - If your model already contains its preprocessing layers (e.g., `Lambda(preprocess_input)`), the notebook automatically detects this — you don’t need to scale inputs manually.  
 - Works with backbones: **MobileNetV2, EfficientNetB0, ResNet50, InceptionV3**  
-- Predictions may be inaccurate if the **wrong backbone is selected** at load time.  
+- Predictions may be inaccurate if the **wrong backbone is selected** at load time.
+
+Some parts of the code and explanatory texts were refined with the assistance of ChatGPT (OpenAI, 2025)
 
