@@ -1,4 +1,4 @@
-# InsectAI-WG3-STSM
+# InsectAI-WG3-STSM - Model Training 
 
 This repository contains educational materials and tutorials developed during the **InsectAI Short-Term Scientific Mission (STSM)**, hosted by **Dr. Paul Bodesheim** at the [Computer Vision Group, Friedrich Schiller University Jena](https://inf-cv.uni-jena.de/), Germany, between **18 August and 12 September 2025**.
 
