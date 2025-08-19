@@ -34,7 +34,8 @@ train/
 - In the Colab menu: **Runtime → Run all**  
 - The notebook will automatically:  
   - Install dependencies  
-  - Load your dataset  
+  - Load your dataset
+  - Provide class_names.txt for prediction
   - Train a model  
   - Save multiple export formats  
   - Provide clickable download buttons  
@@ -85,4 +86,38 @@ The notebook shows:
 - Training and validation accuracy/loss curves   
 - Confusion matrix 
 
+# InsectAI-WG3-STSM – Model Testing  
+
+This repository provides a **testing notebook** (`test_model_with_gradio.ipynb`) that lets you upload a trained model and interactively run predictions via a **Gradio web interface**.  
+
+## 1. Open the Notebook in Google Colab  
+- Click the Colab link for ['test_model_with_gradio.ipynb'](https://colab.research.google.com/drive/YOUR_NOTEBOOK_ID_HERE).  
+- In Colab, go to **File → Save a copy in Drive** to save your own copy.  
+
+## 2. Run the Notebook  
+- In the Colab menu: **Runtime → Run all**  
+- The notebook will automatically:  
+  - Install dependencies  
+  - Launch a **Gradio interface** for image classification  
+
+## 3. Use the Gradio Interface  
+Once the interface launches, you can:  
+1. Upload your **trained model** (`.keras`, `.h5`, or SavedModel `.zip`)  
+2. Upload the **class_names.txt** file (created by `train_model.ipynb`)  
+3. Select the backbone (MobileNetV2, EfficientNetB0, ResNet50, or InceptionV3) if needed  
+4. Upload an **image of an insect**  
+5. Click **Predict** to view the **Top-5 class probabilities**  
+
+## 4. Typical Workflow  
+1. Train your model with `train_model.ipynb`  
+2. Download `class_names.txt` and your model (`.keras`, `.h5`, or `.zip`)  
+3. Open `test_model_with_gradio.ipynb`  
+4. Run the notebook and test with your own insect images  
+
 ---
+
+## Notes  
+- If your model already contains its preprocessing layers (e.g., `Lambda(preprocess_input)`), the notebook automatically detects this — you don’t need to scale inputs manually.  
+- Works with backbones: **MobileNetV2, EfficientNetB0, ResNet50, InceptionV3**  
+- Predictions may be inaccurate if the **wrong backbone is selected** at load time.  
+
