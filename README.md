@@ -1,14 +1,22 @@
-# InsectAI-WG3-STSM - Model Training 
+# InsectAI-WG3-STSM – Model Training & Testing  
 
-This repository contains educational materials and tutorials developed during the **InsectAI Short-Term Scientific Mission (STSM)**, hosted by **Dr. Paul Bodesheim** at the [Computer Vision Group, Friedrich Schiller University Jena](https://inf-cv.uni-jena.de/), Germany, between **18 August and 12 September 2025**.
+This repository contains educational materials and tutorials developed during the **InsectAI Short-Term Scientific Mission (STSM)**, hosted by **Dr. Paul Bodesheim** at the [Computer Vision Group, Friedrich Schiller University Jena](https://inf-cv.uni-jena.de/), Germany, between **18 August and 12 September 2025**.  
 
+It provides unified **Google Colab notebooks** to train and test insect image classifiers using either **TensorFlow/Keras** or **PyTorch**.  
 
-## 1. Open the Notebook in Google Colab
-   - Click the Colab link for ['train_model.ipynb'](https://colab.research.google.com/drive/15nQznMSMnyAkQyuxM7ZbdzXM_5f_9FMy?usp=sharing).
-   - In Colab, go to **File → Save a copy in Drive** to save your own copy.
+## Model Training  
 
-## 2. Prepare Your Dataset  
-   Organize your insect images so each species has its own folder:
+Two framework-specific notebooks are provided:  
+
+- [**Train with Keras** (`model_train_with_keras.ipynb`)](https://colab.research.google.com/drive/14ZDe3DR6h4fQKy2NaXy1SV6T45sC3c1f?usp=sharing)  
+- [**Train with PyTorch** (`model_train_with_pytorch.ipynb`)](https://colab.research.google.com/drive/1KI8h4VPXMwSWwkqq-utlBwO1zOEP2kpJ?usp=sharing)  
+
+### 1. Open the Notebook in Colab  
+- Click one of the above links  
+- In Colab, go to **File → Save a copy in Drive**  
+
+### 2. Prepare Your Dataset  
+Organize your images so each species has its own folder:  
 
 ```
 train/
@@ -21,105 +29,81 @@ train/
     ├── img2.jpg
     └── ...
 ```
-   
+
 - Folder names = class labels  
-- Use `.jpg` or `.png` files  
-- Aim for ≥20–50 images per class
-- Zip your train folder
+- `.jpg` or `.png` images  
+- ≥20–50 images per class recommended  
 
-## 3. Upload Your Dataset to Colab
-- Mount Google Drive and point the notebook to your dataset (train.zip) folder.
+Zip the dataset folder (`train.zip`, optionally `validation.zip`).  
 
-## 4. Run the Notebook 
-- In the Colab menu: **Runtime → Run all**  
-- The notebook will automatically:  
+### 3. Run the Notebook  
+- In Colab: **Runtime → Run all**  
+- The notebook will:  
   - Install dependencies  
-  - Load your dataset
-  - Provide class_names.txt for prediction
-  - Train a model  
-  - Save multiple export formats  
-  - Provide clickable download buttons  
-## 5.  Download Your Model
-- At the end of the notebook, you’ll see **download buttons**:  
-  - **Download .keras** (Keras model)  
-  - **Download .tflite** (TensorFlow Lite model for mobile/edge)  
-  - **Download SavedModel (.zip)**  
-  - **Download ALL outputs (.zip)**
-## Model Outputs  
+  - Load and preprocess your dataset  
+  - Generate `class_names.txt` (one label per line)  
+  - Train a model using the chosen backbone  
+  - Export models in multiple formats  
 
-After training, the following files are generated inside the output folder:  
+### 4. Download Model Outputs  
 
-- `<BACKBONE>_final.keras` → Native Keras model  
-- `<BACKBONE>_savedmodel/` → TensorFlow SavedModel format  
-- `<BACKBONE>.tflite` → TensorFlow Lite model  
-- Optional `.zip` archives created for easy downloading  
+**Keras exports:**  
+- `<BACKBONE>.keras`  
+- `<BACKBONE>_savedmodel/` (SavedModel format)  
+- `<BACKBONE>.tflite` (TensorFlow Lite)  
 
----
+**PyTorch exports:**  
+- `<BACKBONE>.pt` (full model: `torch.save(model, ...)`)  
+- `<BACKBONE>_state_dict.pth` (weights only: `torch.save(model.state_dict(), ...)`)  
+
 
 ## Adjustable Settings  
 
-The notebook exposes simple variables you can change at the top:  
+At the top of each notebook, you can change:  
+- `DATA_DIR` – dataset path  
+- `OUTPUT_DIR` – output folder  
+- `BACKBONE` – backbone architecture (`mobilenet_v2`, `efficientnet_b0`, `resnet50`, `inception_v3`)  
+- `IMG_SIZE` – input size (224 or 299 for InceptionV3)  
+- `BATCH_SIZE`, `EPOCHS`  
 
-- `DATA_DIR` – your dataset path  
-- `OUTPUT_DIR` – where to save models  
-- `BACKBONE` – backbone network (e.g., `mobilenet_v2`, `efficientnet_b0`, `resnet50`)  
-- `IMG_SIZE` – input image size (e.g., 224)  
-- `BATCH_SIZE` – batch size for training  
-- `EPOCHS` – number of training epochs  
+If unsure, just keep the defaults — they work out of the box.  
 
-> If unsure, just keep the defaults — they work out of the box.  
+## Training Tips  
 
----
+- Keep classes balanced  
+- Ensure images are clean and well-labeled  
+- Train longer (`EPOCHS=20+`) if accuracy improves  
+- Enable GPU in Colab (**Runtime → Change runtime type → GPU**)  
 
-## Tips for Good Training  
+## Model Testing  
 
-- Use **balanced classes** (similar number of images per species)  
-- Ensure images are **clear and correctly labeled**  
-- Train longer (`EPOCHS=20+`) if accuracy keeps improving  
-- Enable **GPU runtime** in Colab (Runtime → Change runtime type → Hardware accelerator: GPU)  
+Testing is provided in a **single unified notebook**:  
 
----
+- [**Test with Gradio** (`test_model_with_gradio.ipynb`)](https://colab.research.google.com/drive/1waaanvDYt3pdtK7MAqvpAW9AE_TdR2uC?usp=sharing)  
 
-## Evaluation  
+### 1. Run the Notebook in Colab  
+- **Runtime → Run all**  
 
-The notebook shows:  
-- Training and validation accuracy/loss curves   
-- Confusion matrix 
+### 2. Use the Gradio Interface  
+When launched, the interface lets you:  
 
-# InsectAI-WG3-STSM – Model Testing  
+1. Select **Framework**: Keras or PyTorch  
+2. Upload your trained model  
+   - Keras: `.keras`, `.h5`, or `.zip` (SavedModel)  
+   - PyTorch: `.pt` or `.pth` (full model or state_dict)  
+3. Upload `class_names.txt`  
+4. (If PyTorch state_dict) select the backbone (ResNet50, MobileNetV2, EfficientNetB0, InceptionV3)  
+5. Upload an test image and click **Predict**  
 
-This repository provides a **testing notebook** (`test_model_with_gradio.ipynb`) that lets you upload a trained model and interactively run predictions via a **Gradio web interface**.  
-
-## 1. Open the Notebook in Google Colab  
-- Click the Colab link for ['test_model_with_gradio.ipynb'](https://colab.research.google.com/drive/1waaanvDYt3pdtK7MAqvpAW9AE_TdR2uC?usp=sharing).  
-- In Colab, go to **File → Save a copy in Drive** to save your own copy.  
-
-## 2. Run the Notebook  
-- In the Colab menu: **Runtime → Run all**  
-- The notebook will automatically:  
-  - Install dependencies  
-  - Launch a **Gradio interface** for image classification  
-
-## 3. Use the Gradio Interface  
-Once the interface launches, you can:  
-1. Upload your **trained model** (`.keras`, `.h5`, or SavedModel `.zip`)  
-2. Upload the **class_names.txt** file (created by `train_model.ipynb`)  
-3. Select the backbone (MobileNetV2, EfficientNetB0, ResNet50, or InceptionV3) if needed  
-4. Upload an **image of an insect**  
-5. Click **Predict** to view the **Top-5 class probabilities**  
-
-## 4. Typical Workflow  
-1. Train your model with `train_model.ipynb`  
-2. Download `class_names.txt` and your model (`.keras`, `.h5`, or `.zip`)  
-3. Open `test_model_with_gradio.ipynb`  
-4. Run the notebook and test with your own insect images  
-
----
+Outputs:  
+- **Top-5 probabilities** for multiclass models
 
 ## Notes  
-- If your model already contains its preprocessing layers (e.g., `Lambda(preprocess_input)`), the notebook automatically detects this — you don’t need to scale inputs manually.  
-- Works with backbones: **MobileNetV2, EfficientNetB0, ResNet50, InceptionV3**  
-- Predictions may be inaccurate if the **wrong backbone is selected** at load time.
 
-Some parts of the code and explanatory texts were refined with the assistance of ChatGPT (OpenAI, 2025)
+- The testing notebook auto-detects if preprocessing is embedded inside the Keras model (`Lambda(preprocess_input)`).  
+- PyTorch models always apply ImageNet normalization.  
+- Wrong backbone selection (for state_dict) may lead to incorrect predictions.  
+- Both training and testing workflows run entirely in Colab — no local installation needed.  
+
+Some code and explanatory texts were refined with the assistance of **ChatGPT (OpenAI, 2025)**.  
 
