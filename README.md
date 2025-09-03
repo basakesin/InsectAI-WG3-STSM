@@ -8,13 +8,13 @@ It provides **hands-on tutorials** and **demo applications** to train, test, and
 
 ## Repository Structure  
 
-- **[`Google Colab Notebooks/`](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/Google%20Colab%20Notebooks)**  
+- **[`Google Colab Notebooks/`](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/Google_Colab_Notebooks)**  
   Train and test deep learning models (TensorFlow/Keras or PyTorch) entirely in Google Colab.  
   - `train_model_with_keras.ipynb`  
   - `train_model_with_pytorch.ipynb`  
   - `test_model_with_gradio.ipynb`  
 
-- **[`ButterFly Classifier Flask App/`](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/ButterFly%20Classifier%20Flask%20App)**    
+- **[`ButterFly Classifier Flask App/`](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/ButterFly_Classifier_Flask_App)**    
   A minimal **Flask web app** showing how to deploy a trained model to **Google Cloud Run** with a simple web interface.  
 
 ---
