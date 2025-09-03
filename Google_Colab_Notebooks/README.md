@@ -16,6 +16,16 @@ Two framework-specific notebooks are provided:
 - In Colab, go to **File → Save a copy in Drive**  
 
 ### 2. Prepare Your Dataset  
+
+You can either use your own dataset or start with the provided demo files.  
+
+- This repository already includes `train.zip` and `val.zip` for quick testing.  
+- For a fun demo, you can also try the  
+  [**Tom & Jerry Image Classification Dataset**](https://www.kaggle.com/datasets/balabaskar/tom-and-jerry-image-classification/data).  
+  - Download the prepared archives: [`train.zip`](Google_Colab_Notebooks/train.zip) and [`val.zip`](Google_Colab_Notebooks/val.zip).  
+  - Then run the training notebook to build a **Tom vs. Jerry classifier**.  
+
+
 Organize your images so each species has its own folder:  
 
 ```
@@ -34,7 +44,7 @@ train/
 - `.jpg` or `.png` images  
 - ≥20–50 images per class recommended  
 
-Zip the dataset folder (`train.zip`, optionally `validation.zip`).  
+Zip the dataset folder (`train.zip`, optionally `val.zip`).  
 
 ### 3. Run the Notebook  
 - In Colab: **Runtime → Run all**  
