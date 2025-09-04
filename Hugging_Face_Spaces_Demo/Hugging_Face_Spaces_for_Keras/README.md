@@ -65,7 +65,3 @@ You can change the app title, description, and labels by editing **`app.py`**:
 - **Model mismatch:** If loading fails, re-save your model locally (same TensorFlow/Keras version) and re-upload `model.h5`.  
 - **Build errors:** Check the **Logs** tab in your Space; missing packages usually mean updating `requirements.txt`.
 
-## 🙌 Acknowledgements
-
-Dataset: *Butterfly Image Classification (40 species)* on Kaggle.  
-Tech: Hugging Face Spaces • Gradio • TensorFlow/Keras.
