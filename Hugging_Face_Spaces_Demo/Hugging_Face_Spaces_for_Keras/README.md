@@ -21,7 +21,8 @@ Upload a butterfly image and the app will return the **Top-3 predicted species**
    - Choose **Gradio** as the Space SDK.  
    - Hardware: **CPU** is enough for this demo.
 
-![HF Files]()
+![Create Spaces](HF_create_Space.png)
+
 3. **Upload the project files**  
    - Go to the Space’s **Files** tab → **Upload files**.  
    - Upload these files from this repo:
@@ -37,18 +38,7 @@ Upload a butterfly image and the app will return the **Top-3 predicted species**
 5. **Test the app**  
    - Drop a butterfly image and check the JSON output for the **Top-3 Predictions**.
 
----
-
-## 🖼 Screenshots
-
-> Add these images to `images/` in your GitHub repo and they’ll render below.
-
-
-
-**Create a new Space**  
-![Create Space](images/hf-create-space.png)
-
----
+![Add Files](Add_files_to_HF.png)
 
 ## ✏️ Customize the UI Text
 
@@ -60,7 +50,6 @@ You can change the app title, description, and labels by editing **`app.py`**:
 
 > After editing `app.py`, commit/push or re-upload it to your Space. The Space will rebuild automatically.
 
----
 
 ## 📁 What each file is
 
@@ -69,15 +58,12 @@ You can change the app title, description, and labels by editing **`app.py`**:
 - **`app.py`** — The Gradio app that loads the model and serves predictions.  
 - **`requirements.txt`** — Python dependencies for the Space.
 
----
 
 ## ❗️Common pitfalls
 
 - **Wrong class order:** Ensure `class_names.txt` matches the exact order of your model’s output classes.  
 - **Model mismatch:** If loading fails, re-save your model locally (same TensorFlow/Keras version) and re-upload `model.h5`.  
 - **Build errors:** Check the **Logs** tab in your Space; missing packages usually mean updating `requirements.txt`.
-
----
 
 ## 🙌 Acknowledgements
 
