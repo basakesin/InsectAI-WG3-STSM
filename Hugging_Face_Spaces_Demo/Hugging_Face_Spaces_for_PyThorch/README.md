@@ -5,14 +5,11 @@ The model was trained on the [Kaggle Butterfly Image Classification dataset](htt
 
 Upload a butterfly image and the app will return the **Top-3 predicted species** with probabilities.
 
----
 
 ## 🚀 Demo
 
 👉 [Try the demo on Hugging Face Spaces](https://huggingface.co/spaces/YOUR_USERNAME/YOUR_REPO_NAME)  
-*(replace with your actual Space link)*
 
----
 
 ## 🚀 Deploy on Hugging Face Spaces (No coding needed)
 
@@ -43,7 +40,6 @@ Upload a butterfly image and the app will return the **Top-3 predicted species**
 
 ![Add Files](Add_files_to_HF.png)
 
----
 
 ## ✏️ Customize the UI Text
 
@@ -55,8 +51,6 @@ You can change the app title, description, and labels by editing **`app.py`**:
 
 > After editing `app.py`, commit/push or re-upload it to your Space. The Space will rebuild automatically.
 
----
-
 ## 📁 What each file is
 
 - **`model.pth`** — Your trained PyTorch model (saved with `torch.save(model.state_dict())`).  
@@ -64,7 +58,6 @@ You can change the app title, description, and labels by editing **`app.py`**:
 - **`app.py`** — The Gradio app that loads the model and serves predictions.  
 - **`requirements.txt`** — Python dependencies for the Space.
 
----
 
 ## ❗️ Common pitfalls
 
@@ -73,9 +66,4 @@ You can change the app title, description, and labels by editing **`app.py`**:
 - **Model loading error:** If `state_dict` keys don’t match, confirm you saved with `torch.save(model.state_dict(), "model.pth")` and not a full model.  
 - **Build errors:** Check the **Logs** tab in your Space; missing packages usually mean updating `requirements.txt`.
 
----
-
-## 🙌 Acknowledgements
-
-Dataset: *Butterfly Image Classification* on Kaggle.  
-Tech: Hugging Face Spaces • Gradio • PyTorch.  
+ 
