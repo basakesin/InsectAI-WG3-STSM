@@ -5,8 +5,9 @@ Within the InsectAI COST Action, our aim is to make AI-based insect monitoring t
 
 We present **two different paths** for deploying models:
 
-- **Path 1:** Train your model in Google Colab and deploy on Hugging Face Spaces (See the documentation for Keras and PyTorch) 
-- **Path 2:** Use Hugging Face AutoTrain to train and deploy directly on Spaces  
+- **Path 1:** Train your model in Google Colab and deploy on Hugging Face Spaces (See the documentation for [Keras](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/Hugging_Face_Spaces_Demo/Hugging_Face_Spaces_for_Keras) and [PyTorch](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/Hugging_Face_Spaces_Demo/Hugging_Face_Spaces_for_PyThorch)) 
+- **Path 2:** Use Hugging Face AutoTrain to train and deploy directly on Spaces ([see the instructions here](https://github.com/basakesin/InsectAI-WG3-STSM/tree/main/Hugging_Face_Spaces_Demo/Hugging_Face_Spaces_for_Autotrain))
+
 
 
 
