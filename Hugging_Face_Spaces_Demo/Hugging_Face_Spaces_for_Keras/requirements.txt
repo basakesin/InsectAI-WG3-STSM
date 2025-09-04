@@ -1,6 +1,5 @@
-tensorflow==2.19.0
-tf-keras==2.19.0
-keras==3.5.0
-numpy==2.0.2
-Pillow>=10.3.0
-gradio
+flask
+tensorflow
+numpy
+pillow
+werkzeug
