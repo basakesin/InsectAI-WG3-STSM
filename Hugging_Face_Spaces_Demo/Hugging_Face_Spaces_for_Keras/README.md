@@ -1,10 +1,9 @@
-# 🦋 Butterfly Classifier (Keras + Gradio on Hugging Face Spaces)
+# 🦋 Deploying Image Classifiers (Keras + Gradio on Hugging Face Spaces)
 
-This repository contains a **butterfly image classifier** trained with **Keras** and deployed on **Hugging Face Spaces** using **Gradio**.  
-The model was trained on the [Kaggle Butterfly Image Classification dataset](https://www.kaggle.com/datasets/gpiosenka/butterfly-images40-species).
+This repository explains how to **deploy any image classifier trained with Keras** on **Hugging Face Spaces** using **Gradio**.  
+As an example, we demonstrate a **butterfly image classifier** trained on the [Kaggle Butterfly Image Classification dataset](https://www.kaggle.com/datasets/gpiosenka/butterfly-images40-species).
 
-Upload a butterfly image and the app will return the **Top-3 predicted species** with probabilities.
-
+By following the same steps, you can deploy your own Keras-based image classifier and serve it with a simple web interface.  
 
 ## 🚀 Demo
 
