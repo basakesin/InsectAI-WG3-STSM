@@ -9,7 +9,7 @@ It provides unified **Google Colab notebooks** to train and test insect image cl
 Two framework-specific notebooks are provided:  
 
 - [**Train with Keras** (`train_model_with_keras.ipynb`)](https://colab.research.google.com/drive/14ZDe3DR6h4fQKy2NaXy1SV6T45sC3c1f?)  
-- [**Train with PyTorch** (`train_model_with_pytorch.ipynb`)](https://colab.research.google.com/drive/1KI8h4VPXMwSWwkqq-utlBwO1zOEP2kpJ?usp=sharing)  
+- [**Train with PyTorch** (`train_model_with_pytorch.ipynb`)](https://colab.research.google.com/drive/1uVfFELx63I2pJr29wD0Yyz5MLsGTOOR9?)  
 
 ### 1. Open the Notebook in Colab  
 - Click one of the above links  
