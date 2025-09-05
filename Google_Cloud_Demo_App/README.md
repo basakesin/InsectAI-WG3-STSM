@@ -11,8 +11,19 @@ Users can upload butterfly images (or select example ones) to classify them into
 The provided web interface (`index.html`) supports drag-and-drop uploads and displays the predicted class with confidence.  
 
 ## 🗂 Project Structure
-
-
+```
+Google_Cloud_Demo_App/
+├── app.py # Flask app (Keras version, uses model.h5)
+├── app_pytorch.py # Flask app (PyTorch version, uses model.pth)
+├── requirements.txt # Dependencies
+├── class_names.txt # Class labels (one per line)
+├── model.h5 # Example trained Keras model
+├── model.pth # Example trained PyTorch model
+├── templates/
+│  └── index.html # Frontend web page
+└── static/
+   └── Example_Images/ # Example butterfly images
+```
 ## 🖥️ How to Run Locally
 
 1. Clone this repository:
