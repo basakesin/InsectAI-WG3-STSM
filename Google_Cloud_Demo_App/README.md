@@ -78,6 +78,23 @@ Step 4: Deploy to Cloud Run
 ```
 After deployment, Cloud Run will print a service URL. Open it in your browser to use the app.
 
+## 📸 Screenshots
+
+### Homepage
+![Homepage](screenshots/homepage.png)
+
+### Result Page
+![Result Page](screenshots/result_page.png)
+
+
+💡 **Tip:**  
+You can customize the look and feel of the web app by editing `index.html`.  
+- Change the `<h1>` and `<p>` tags to update the title and description.  
+- Modify styles (colors, fonts, layout) in the `<style>` section.  
+
+If you prefer, you can also provide your desired style or design as a **prompt** to GPT models (e.g., ChatGPT) and automatically generate updated HTML/CSS code for `index.html`. This makes it easy to experiment with different designs without manually editing all CSS.
+
+
 
 
 
