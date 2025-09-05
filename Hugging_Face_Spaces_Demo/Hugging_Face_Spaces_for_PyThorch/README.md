@@ -7,7 +7,7 @@ By following the same steps, you can deploy your own PyTorch-based image classif
 
 ## 🚀 Demo
 
-👉 [Try the demo on Hugging Face Spaces](https://huggingface.co/spaces/YOUR_USERNAME/YOUR_REPO_NAME)  
+👉 [Try the demo on Hugging Face Spaces](https://huggingface.co/spaces/basakesin/image_classifier_with_pytorch)  
 
 
 ## 🚀 Deploy on Hugging Face Spaces (No coding needed)
