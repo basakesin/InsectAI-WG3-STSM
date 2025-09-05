@@ -23,16 +23,16 @@
             text-align: center;
         }
 
-.container {
-    width: 90%;  /* Responsive width */
-    max-width: 500px;  /* Prevent it from being too wide on large screens */
-    padding: 30px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
         h1 {
             font-size: 26px;
@@ -43,20 +43,6 @@
             font-size: 14px;
             margin-bottom: 15px;
             opacity: 0.8;
-        }
-
-        .model-selector {
-            margin-bottom: 15px;
-        }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            background: #ffffff;
-            border: none;
-            outline: none;
         }
 
         .upload-box {
@@ -138,17 +124,7 @@
 
     <div class="container">
         <h1>🦋 Butterfly Classifier</h1>
-        <p>This AI model is trained on butterfly species using deep learning techniques. Select a model, upload an image, or choose an example to classify a butterfly.</p>
-
-        <div class="model-selector">
-            <label for="modelSelect">Choose Classifier:</label>
-            <select id="modelSelect">
-                <option value="VGG16">VGG16"
-                </option>
-                <option value="MobileNetV2">MobileNet</option>
-                <option value="InceptionV3">InceptionV3</option>
-            </select>
-        </div>
+        <p>This AI model is trained on butterfly species using deep learning techniques. Upload an image or choose an example to classify a butterfly.</p>
 
         <label for="fileUpload" class="upload-box" id="dropZone">
             <p>Drag & Drop or Click to Upload</p>
@@ -165,17 +141,17 @@
 
         <div class="examples">
             <p>📸 Try an Example Image:</p>
-            <img src="{{ url_for('static', filename='Example_Images/ARCIGERA_FLOWER_MOTH.jpg') }}"
+            <img src="{{ url_for('static', filename='Example_Images/demo_img1.jpg') }}"
                  alt="Arcigera Flower Moth"
                  title="Arcigera Flower Moth"
                  onclick="predictExample(this.src)">
 
-            <img src="{{ url_for('static', filename='Example_Images/BLUE_MORPHO.jpg') }}"
+            <img src="{{ url_for('static', filename='Example_Images/demo_img2.jpg') }}"
                  alt="Blue Morpho"
                  title="Blue Morpho"
                  onclick="predictExample(this.src)">
 
-            <img src="{{ url_for('static', filename='Example_Images/SILVER_SPOT_SKIPPER.jpg') }}"
+            <img src="{{ url_for('static', filename='Example_Images/demo_img3.jpg') }}"
                  alt="Silver Spot Skipper"
                  title="Silver Spot Skipper"
                  onclick="predictExample(this.src)">
@@ -189,7 +165,6 @@
         const preview = document.querySelector('.preview');
         const loading = document.querySelector('.loading');
         const result = document.querySelector('.result');
-        const modelSelect = document.getElementById('modelSelect');
 
         dropZone.addEventListener('click', () => {
             fileUpload.value = "";
@@ -243,32 +218,28 @@
             reader.readAsDataURL(file);
         }
 
-async function uploadAndPredict(file) {
-    loading.style.display = 'block';
-    result.innerHTML = '';
+        async function uploadAndPredict(file) {
+            loading.style.display = 'block';
+            result.innerHTML = '';
 
-    let formData = new FormData();
-    formData.append("file", file);
-    formData.append("model", modelSelect.value);
+            let formData = new FormData();
+            formData.append("file", file);
 
-    const response = await fetch("/predict", {
-        method: "POST",
-        body: formData
-    });
+            const response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
 
-    const data = await response.json();
-    loading.style.display = 'none';
+            const data = await response.json();
+            loading.style.display = 'none';
 
-    result.innerHTML = `
-        <p>🦋 <b>Model:</b> <span class="glow">${modelSelect.value}</span></p>
-        <p>🦋 <b>Predicted:</b> <span class="glow">${data.class}</span></p>
-        <p>🔍 <b>Confidence:</b> <span class="glow">${(data.confidence * 100).toFixed(2)}%</span></p>
-    `;
+            result.innerHTML = `
+                <p>🦋 <b>Predicted:</b> <span class="glow">${data.class}</span></p>
+                <p>🔍 <b>Confidence:</b> <span class="glow">${(data.confidence * 100).toFixed(2)}%</span></p>
+            `;
 
-    // ✅ Prevent scrolling down, keeping header visible
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 
 </body>
