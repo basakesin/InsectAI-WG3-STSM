@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Classifier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .upload-box {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-box p {
+            font-size: 16px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .glow {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        .examples {
+            margin-top: 20px;
+        }
+
+        .examples img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .examples img:hover {
+            transform: scale(1.1);
+            border-color: #ffcc00;
+        }
+
+        .preview {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .preview img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 2px solid #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🦋 Butterfly Classifier</h1>
+        <p>This AI model is trained on butterfly species using deep learning techniques. Upload an image or choose an example to classify a butterfly.</p>
+
+        <label for="fileUpload" class="upload-box" id="dropZone">
+            <p>Drag & Drop or Click to Upload</p>
+        </label>
+        <input type="file" id="fileUpload" accept="image/*">
+
+        <div class="preview">
+            <p>📷 Uploaded Image:</p>
+            <img id="uploadedImage" src="" alt="Uploaded Butterfly">
+        </div>
+
+        <div class="loading">⏳ Predicting...</div>
+        <div class="result"></div>
+
+        <div class="examples">
+            <p>📸 Try an Example Image:</p>
+            <img src="{{ url_for('static', filename='Example_Images/demo_img1.jpg') }}"
+                 alt="Arcigera Flower Moth"
+                 title="Arcigera Flower Moth"
+                 onclick="predictExample(this.src)">
+
+            <img src="{{ url_for('static', filename='Example_Images/demo_img2.jpg') }}"
+                 alt="Blue Morpho"
+                 title="Blue Morpho"
+                 onclick="predictExample(this.src)">
+
+            <img src="{{ url_for('static', filename='Example_Images/demo_img3.jpg') }}"
+                 alt="Silver Spot Skipper"
+                 title="Silver Spot Skipper"
+                 onclick="predictExample(this.src)">
+        </div>
+    </div>
+
+    <script>
+        let fileUpload = document.getElementById('fileUpload');
+        const dropZone = document.getElementById('dropZone');
+        const uploadedImage = document.getElementById('uploadedImage');
+        const preview = document.querySelector('.preview');
+        const loading = document.querySelector('.loading');
+        const result = document.querySelector('.result');
+
+        dropZone.addEventListener('click', () => {
+            fileUpload.value = "";
+            fileUpload.click();
+        });
+
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.style.background = "rgba(255, 255, 255, 0.2)";
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.style.background = "rgba(255, 255, 255, 0.1)";
+        });
+
+        dropZone.addEventListener("drop", async (e) => {
+            e.preventDefault();
+            dropZone.style.background = "rgba(255, 255, 255, 0.1)";
+
+            const file = e.dataTransfer.files[0];
+            if (!file) return;
+
+            displayImage(file);
+            await uploadAndPredict(file);
+        });
+
+        fileUpload.addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            displayImage(file);
+            await uploadAndPredict(file);
+        });
+
+        function predictExample(imageUrl) {
+            fetch(imageUrl)
+                .then(res => res.blob())
+                .then(blob => {
+                    const file = new File([blob], "example.jpg", { type: "image/jpeg" });
+                    displayImage(file);
+                    uploadAndPredict(file);
+                });
+        }
+
+        function displayImage(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function uploadAndPredict(file) {
+            loading.style.display = 'block';
+            result.innerHTML = '';
+
+            let formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+            loading.style.display = 'none';
+
+            result.innerHTML = `
+                <p>🦋 <b>Predicted:</b> <span class="glow">${data.class}</span></p>
+                <p>🔍 <b>Confidence:</b> <span class="glow">${(data.confidence * 100).toFixed(2)}%</span></p>
+            `;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
