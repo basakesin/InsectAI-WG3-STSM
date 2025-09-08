@@ -1,26 +1,33 @@
-# Python image'i kullanarak başlıyoruz
 FROM python:3.10-slim
 
-# Gerekli sistem paketlerini yükleyelim
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    g++ \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
-# Çalışma dizini oluştur
+# Minimal system libs for TF/Flask + image ops (OpenCV not required here)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+ && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Gereksinimlerimizi yükleyelim
-COPY requirements.txt requirements.txt
-RUN python -m pip install -r requirements.txt
+# Install Python deps
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip && pip install -r requirements.txt gunicorn
 
-# Uygulama dosyalarını kopyalıyoruz
-COPY . .
+# Copy app and assets (ensure these files exist locally!)
+COPY app.py .
+COPY model.h5 .
+COPY class_names.txt .
+# If you have templates and static assets:
+COPY templates ./templates
+COPY static ./static
 
-# Port açıyoruz
-EXPOSE 5000
+# Cloud Run uses PORT
+ENV PORT=8080
 
-# Command to run the application
-CMD ["python", "app.py"]
+# Start with gunicorn (more robust than python app.py)
+CMD exec gunicorn -b :$PORT app:app --timeout 120 --workers 1 --threads 4
