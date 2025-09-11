@@ -23,7 +23,7 @@ By following the same steps, you can deploy your own PyTorch-based image classif
 ![Create Spaces](HF_create_Space.png)
 
 3. **Upload the project files**  
-   - Go to the Space’s **Files** tab → **Upload files**.  
+   - Go to the Space’s **Files** tab → **Contribute** → **Upload files**.  
    - Upload these files from this repo:
      - `app.py`
      - `requirements.txt`
