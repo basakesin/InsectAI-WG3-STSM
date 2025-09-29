@@ -81,10 +81,10 @@ After deployment, Cloud Run will print a service URL. Open it in your browser to
 ## 📸 Screenshots
 
 ### Homepage
-<img src="screenshots/homepage.png" alt="Homepage" width="400">
+<img src="Keras/screenshots/homepage.png" alt="Homepage" width="400">
 
 ### Result Page
-<img src="screenshots/result_page.png" alt="Result Page" width="400">
+<img src="Keras/screenshots/result_page.png" alt="Result Page" width="400">
 
 
 💡 **Tip:**  
